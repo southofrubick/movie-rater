@@ -1,9 +1,19 @@
+import './Carousel.css'
 import { Poster } from '../../components'
+import type { PosterType } from '../../components'
 
-export default function Carousel() {
+interface CarouselProps {
+    movies: PosterType[]
+}
+
+export default function Carousel({ movies }: CarouselProps) {
     return (
-        <>
-            <Poster src="https://a.ltrbxd.com/resized/film-poster/9/5/7/0/5/0/957050-superman-2025-0-230-0-345-crop.jpg?v=54e41a55ff" alt="superman" />
-        </>
+        <div id="carousel">
+            {movies.map((movie) => {
+                const { src, title, year, rating } = movie
+
+                return <Poster src={src} title={title} year={year} rating={rating} key={title+year} />
+            })}
+        </div>
     )
 }
