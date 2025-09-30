@@ -1,0 +1,15 @@
+.poster {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+
+    filter: opacity(0.65);
+}
+
+.poster:hover {
+    filter: opacity(1);
+}
+
+.poster-title {
+    font-weight: bold;
+}

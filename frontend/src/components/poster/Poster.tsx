@@ -1,8 +1,19 @@
-interface PosterProps {
+import './Poster.css'
+
+export interface PosterType {
     src: string
-    alt: string
+    title: string
+    year: string
+    rating: number
 }
 
-export default function Poster({src, alt}: PosterProps) {
-    return <img src={src} alt={alt} />
+export default function Poster({src, title, year, rating}: PosterType) {
+    return (
+        <div className="poster">
+            <img src={src} alt={title} />
+            <span className="poster-title">{title}</span>
+            <span>{year}</span>
+            <div>{rating}/5</div>
+        </div>
+    )
 }
