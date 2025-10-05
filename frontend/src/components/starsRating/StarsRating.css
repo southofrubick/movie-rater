@@ -1,0 +1,29 @@
+input[type="range"] {
+  --s: 1em; /* control the size*/
+  width: 5em;
+  
+  --_s: calc(attr(step type(<number>),1)*var(--s)/2);
+  height: var(--s);
+  padding-inline: var(--_s);
+  box-sizing: border-box;
+  appearance: none;
+  cursor: pointer;
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L79 95 L2 40 L98 40 L21 95 Z'/></svg>");
+  mask-size: var(--s);
+}
+input[type="range" i]::-webkit-slider-thumb{
+  width: 1px;
+  height: var(--s);
+  border-image: linear-gradient(90deg, #7a8fb8 calc(50% + var(--_s)), #232832 0) fill 0//0 500px;
+  appearance: none;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 1px;
+  height: var(--s);
+  border-image: linear-gradient(90deg, #7a8fb8 calc(50% + var(--_s)), #232832 0) fill 0//0 500px;
+  appearance: none;
+}
+
+span:has(:focus-visible) {
+   outline: 2px solid;
+}
