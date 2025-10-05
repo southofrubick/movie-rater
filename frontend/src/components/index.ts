@@ -1,4 +1,7 @@
 export { Poster } from './poster'
 export { SearchBar } from './searchbar'
-
-export type { PosterType } from './poster'
+export { MovieModal } from './movieModal'
+export { MovieCard } from './movieCard'
+export { CommentCard } from './commentCard'
+export { Spinner } from './spinner'
+export { StarsRating } from './starsRating'
