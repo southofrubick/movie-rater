@@ -3,41 +3,18 @@ using System.Text.Json;
 class MovieServices
 {
     HttpClient client;
-
-    Dictionary<string, Movie> movies;
-    Dictionary<string, Movie> popularMovies;
-
-    List<Review> reviews;
-
-    string[] popularMovieIDs = [
-        "tt30144839",
-        "tt5950044",
-        "tt6800268",
-        "tt26581740",
-        "tt10676052"
-    ];
+    InMemoryDatabase imdb = new InMemoryDatabase();
 
     public MovieServices()
     {
         client = new HttpClient();
-        movies = new Dictionary<string, Movie>();
-        popularMovies = new Dictionary<string, Movie>();
-        reviews = new List<Review>();
 
         InitializePopularMovies();
     }
 
-    public ReviewAndMovie[] getLatestComments(int size = 10, int page = 0)
+    public ReviewAndMovie[] getLatestComments(int size = 10)
     {
-        Review[] latestReviews = reviews.TakeLast(size).Reverse().ToArray();
-        ReviewAndMovie[] reviewsAndMovies = new ReviewAndMovie[latestReviews.Count()];
-
-        for (int i = 0; i < latestReviews.Length; i++)
-        {
-            reviewsAndMovies[i] = new ReviewAndMovie(latestReviews[i], movies[latestReviews[i].movieID]);
-        }
-
-        return reviewsAndMovies;
+        return imdb.getLatestReviews(size);
     }
 
     public Movie parseMovie(string movieString)
@@ -49,12 +26,12 @@ class MovieServices
             throw new ArgumentNullException("parseMovie");
         }
 
-        if (!movies.ContainsKey(movie.imdbID))
+        if (!imdb.MovieExists(movie.imdbID))
         {
-            movies[movie.imdbID] = movie;
+            imdb.AddMovie(movie.imdbID, movie);
         }
 
-        return movies[movie.imdbID];
+        return imdb.GetMovie(movie.imdbID);
     }
 
     public async Task<Movie> getMovieByID(string id)
@@ -89,43 +66,28 @@ class MovieServices
 
     async void InitializePopularMovies()
     {
-        foreach (string id in popularMovieIDs)
+        foreach (string id in imdb.popularMovieIDs)
         {
-            movies[id] = await getMovieByID(id);
+            imdb.AddMovie(id, await getMovieByID(id));
         }
     }
 
     public double addReview(string id, int rating, string comment)
     {
-        Review newReview = new Review(reviews.Count(), id, rating, comment);
-        reviews.Add(newReview);
-        movies[id].AddReview(newReview);
+        imdb.AddReview(id, rating, comment);
 
         return 0.0;
     }
 
     public double updateReview(int index, string movieID, int rating, string comment)
     {
-        Review newReview = new Review(index, movieID, rating, comment);
-        Review oldReview = reviews[index];
+        imdb.UpdateReview(index, movieID, rating, comment);
 
-        reviews[index].rating = rating;
-        reviews[index].comment = comment;
-
-        movies[movieID].UpdateReview(newReview);
-
-        return movies[movieID].averageRating;
+        return imdb.GetAverageRatingForMovie(movieID);
     }
 
     public Movie[] getPopularMovies()
     {
-        Movie[] popularMovies = new Movie[popularMovieIDs.Length];
-
-        for (int i = 0; i < popularMovieIDs.Length; i++)
-        {
-            popularMovies[i] = movies[popularMovieIDs[i]];
-        }
-
-        return popularMovies;
+        return imdb.GetPopularMovies();
     }
 }
