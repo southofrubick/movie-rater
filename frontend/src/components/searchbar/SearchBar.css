@@ -4,4 +4,7 @@ input {
     border-radius: 10px;
     background-color: #191919;
     text-align: center;
+    align-items: center;
+
+    background-color: #151515;
 }
