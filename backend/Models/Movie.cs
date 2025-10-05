@@ -19,7 +19,7 @@ class Movie
     }
 
     public void CalculateAverageRating() {
-        averageRating = reviews.Average(review => review.rating);
+        averageRating = Math.Round(reviews.Average(review => review.rating * 2), MidpointRounding.AwayFromZero) / 2;
     }
 
     public void AddReview(Review review)
