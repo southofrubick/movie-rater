@@ -1,18 +1,22 @@
+import type { Movie } from 'types'
 import './Carousel.css'
-import { Poster } from '../../components'
-import type { PosterType } from '../../components'
+import { Poster } from 'components'
 
 interface CarouselProps {
-    movies: PosterType[]
+    movies: Movie[] | null
 }
 
 export default function Carousel({ movies }: CarouselProps) {
+    if (!movies || movies.length < 1) {
+        return <div />
+    }
+
     return (
         <div id="carousel">
             {movies.map((movie) => {
-                const { src, title, year, rating } = movie
+                const { title, year } = movie
 
-                return <Poster src={src} title={title} year={year} rating={rating} key={title+year} />
+                return <Poster movie={movie} key={title+year} />
             })}
         </div>
     )
