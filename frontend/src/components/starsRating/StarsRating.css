@@ -10,6 +10,7 @@ input[type="range"] {
   cursor: pointer;
   mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L79 95 L2 40 L98 40 L21 95 Z'/></svg>");
   mask-size: var(--s);
+  cursor: default;
 }
 input[type="range" i]::-webkit-slider-thumb{
   width: 1px;
