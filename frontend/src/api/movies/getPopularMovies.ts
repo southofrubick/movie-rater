@@ -1,9 +1,15 @@
-import axios from 'Axios'
+import axios, { AxiosError } from 'Axios'
+import type { Movie } from 'types'
 
-export default function getPopularMovies() {
-    const movies = axios.get('http://localhost:5223/movies/popular/')
-        .then((response) => response.data)
-        .catch((error) => {console.log(error)})
+export default async function getPopularMovies() {
+    let error: AxiosError | null = null
 
-    return movies
+    const result = await axios.get('http://localhost:5223/movies/popular/')
+        .then((response) => response.data as Movie[])
+        .catch((e) => {
+            error = e
+        })
+
+
+    return { error, result }
 }
