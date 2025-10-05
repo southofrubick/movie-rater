@@ -69,14 +69,12 @@ export default function MovieModal(props: { movie: Movie, onSubmit: (submitProps
     }
 
     const handleSubmit= () => {
-        if (rating !== 0 && comment !== '') {
-            const submitProps = {
-                newRating: rating,
-                newComment: comment
-            } as SubmitProps
+        const submitProps = {
+            newRating: rating,
+            newComment: comment
+        } as SubmitProps
 
-            onSubmit({ ...submitProps })
-        }
+        onSubmit({ ...submitProps })
 
         updateReviews()
     }
@@ -98,7 +96,7 @@ export default function MovieModal(props: { movie: Movie, onSubmit: (submitProps
                         <RenderRatingRadios rating={rating} onSelect={handleChangeRating} />
                     </div>
                     <textarea value={comment} placeholder="Write comment here.." onChange={handleComment} />
-                    <button id="edit-button" onClick={handleSubmit} >Submit Review</button>
+                    <button id="edit-button" onClick={handleSubmit} disabled={rating === 0 || comment === ''} title="Both rating and comment are needed">Submit Review</button>
                 </div>
                 <button id="close-button" onClick={closeModal} >X</button>
             </div>

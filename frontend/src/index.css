@@ -54,3 +54,8 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+button:disabled {
+  background: linear-gradient(#353535, #283032);
+  border-color: #404040;
+  cursor: default;
+}
