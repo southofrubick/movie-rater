@@ -4,6 +4,11 @@
     width: 240px;
 
     filter: opacity(0.85);
+
+    img {
+        height: 300px;
+        box-shadow: 5px 5px 10px #00000050, 2px 2px 4px #00000080;
+    }
 }
 
 .poster:hover {
