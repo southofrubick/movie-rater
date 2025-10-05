@@ -4,7 +4,7 @@ import { searchForMovie } from 'api'
 import { MovieCard, MovieModal } from '../'
 import { useModal } from 'hooks'
 import { postRating } from 'api'
-import type { Movie } from 'types'
+import type { Movie, SubmitProps } from 'types'
 
 const DEBOUNCE_TIMER = 300
 
@@ -24,7 +24,7 @@ export default function SearchBar() {
         setShowResult(false)
     }
 
-    const handleSubmit = (submitProps: { id?: string, newRating: number, newComment: string }) => {
+    const handleSubmit = (submitProps: SubmitProps) => {
         const { newRating, newComment } = submitProps
 
         postRating(movie!.imdbID, newRating, newComment).then(() => {

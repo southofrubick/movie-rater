@@ -2,9 +2,13 @@ import { useModal } from 'hooks'
 import './Poster.css'
 import { postRating } from 'api'
 import { MovieModal, StarsRating } from 'components'
-import type { Movie } from 'types'
+import type { Movie, SubmitProps } from 'types'
 
-export default function Poster(props: { movie: Movie }) {
+type PosterProps = {
+    movie: Movie
+}
+
+export default function Poster(props: PosterProps) {
     const { movie } = props
     const { poster, title, year, averageRating } = movie
     const { currentModal, openModal, closeModal } = useModal()
@@ -13,7 +17,7 @@ export default function Poster(props: { movie: Movie }) {
         openModal('movie-modal')
     }
 
-    const handleSubmit = (submitProps: { newRating: number, newComment: string }) => {
+    const handleSubmit = (submitProps: SubmitProps) => {
         const { newRating, newComment } = submitProps
         postRating(movie.imdbID, newRating, newComment).then(() => {
             closeModal()

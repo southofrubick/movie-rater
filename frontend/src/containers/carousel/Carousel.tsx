@@ -2,7 +2,7 @@ import type { Movie } from 'types'
 import './Carousel.css'
 import { Poster } from 'components'
 
-interface CarouselProps {
+type CarouselProps = {
     movies: Movie[] | null
 }
 

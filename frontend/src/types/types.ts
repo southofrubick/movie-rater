@@ -19,3 +19,10 @@ export interface ReviewAndMovie {
     review: Review,
     movie: Movie
 }
+
+export interface SubmitProps {
+    id?: string,
+    newRating: number,
+    newComment: string,
+}
+

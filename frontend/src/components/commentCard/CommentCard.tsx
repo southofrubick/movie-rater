@@ -2,9 +2,14 @@ import { putRating } from "api"
 import './CommentCard.css'
 import { useModal } from "hooks"
 import { MovieModal, StarsRating } from "components"
-import type { Movie, Review } from "types"
+import type { Movie, Review, SubmitProps } from "types"
 
-export default function CommentCard(props: { review: Review, movie: Movie }) {
+type CommentCardProps = {
+    review: Review,
+    movie: Movie
+}
+
+export default function CommentCard(props: CommentCardProps) {
     const { review, movie } = props
     const { comment, rating } = review
     const { poster, title, year } = movie
@@ -14,7 +19,7 @@ export default function CommentCard(props: { review: Review, movie: Movie }) {
         openModal('comment-modal')
     }
 
-    const submit = (submitProps: { newRating: number, newComment: string }) => {
+    const submit = (submitProps: SubmitProps) => {
         const { newRating, newComment } = submitProps
 
         putRating(review.id, movie.imdbID, newRating, newComment).then(() => {

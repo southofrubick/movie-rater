@@ -1,1 +1,1 @@
-export type { Movie, Review, ReviewAndMovie } from './types'
+export type { Movie, Review, ReviewAndMovie, SubmitProps } from './types'
