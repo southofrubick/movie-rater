@@ -2,48 +2,19 @@ import { useContext, useEffect, useState, type ChangeEvent } from 'react'
 import './MovieModal.css'
 import { StarsRating } from 'components/starsRating'
 import CommentsContext from 'stores/Context'
-import type { Movie } from 'types'
+import type { Movie, SubmitProps } from 'types'
+import { RatingRadios } from 'containers'
 
-function RatingRadio(props: { value: number, rating: number, onSelect: (event: ChangeEvent<HTMLInputElement>) => void }) {
-    const { onSelect, rating, value } = props
-
-    return (
-        <>
-            <label>
-            {value}
-                <input
-                    type="radio"
-                    name="rating"
-                    value={value}
-                    checked={rating === value}
-                    onChange={onSelect}
-                />
-            </label>
-        </>
-    )
+type MovieModalProps = {
+    movie: Movie,
+    onSubmit: (submitProps: SubmitProps) => void,
+    closeModal: () => void,
+    editable?: {
+        index: number,
+    }
 }
 
-function RenderRatingRadios(props: { rating: number, onSelect: (event: ChangeEvent<HTMLInputElement>) => void }) {
-    const { rating, onSelect } = props
-
-    return (
-        <>
-            <RatingRadio onSelect={onSelect} rating={rating} value={1} />
-            <RatingRadio onSelect={onSelect} rating={rating} value={2} />
-            <RatingRadio onSelect={onSelect} rating={rating} value={3} />
-            <RatingRadio onSelect={onSelect} rating={rating} value={4} />
-            <RatingRadio onSelect={onSelect} rating={rating} value={5} />
-        </>
-    )
-}
-
-type SubmitProps = {
-    id?: string,
-    newRating: number,
-    newComment: string,
-}
-
-export default function MovieModal(props: { movie: Movie, onSubmit: (submitProps: SubmitProps) => void, closeModal: () => void, editable?: { index: number } }) {
+export default function MovieModal(props: MovieModalProps) {
     const { movie, onSubmit, closeModal, editable } = props
     const { poster, title, plot, year, averageRating } = movie
     const { updateReviews } = useContext(CommentsContext)
@@ -93,7 +64,7 @@ export default function MovieModal(props: { movie: Movie, onSubmit: (submitProps
                 <div className="form">
                     <span className="title">Leave Review</span>
                     <div className="rating">
-                        <RenderRatingRadios rating={rating} onSelect={handleChangeRating} />
+                        <RatingRadios rating={rating} onSelect={handleChangeRating} />
                     </div>
                     <textarea value={comment} placeholder="Write comment here.." onChange={handleComment} />
                     <button id="edit-button" onClick={handleSubmit} disabled={rating === 0 || comment === ''} title="Both rating and comment are needed">Submit Review</button>
