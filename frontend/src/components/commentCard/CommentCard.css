@@ -1,0 +1,41 @@
+.comment-card {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 25px;
+    padding: 15px;
+
+    border-radius: 8px;
+    border: 1px solid #646cff60;
+    background: linear-gradient(#19191910, #191919 50%);
+    width: 40vw;
+
+    height: 225px;
+
+    box-shadow: 4px 4px 10px #00000030;
+
+    img {
+        height: 225px;
+        width: 160px;
+    }
+
+    .summary {
+        text-align: left;
+        display: grid;
+        grid-template-rows: 1fr 1fr 10fr;
+
+        width: 465px;
+
+        .comment {
+            height: 175px;
+            overflow-y: hidden;
+        }
+    }
+
+    button {
+        position: relative;
+        top: 193px;
+        right: -16px;
+        height: 3em;
+        border-radius: 0 0 8px 0;
+    }
+}
