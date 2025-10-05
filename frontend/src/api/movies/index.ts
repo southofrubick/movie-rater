@@ -1,1 +1,5 @@
 export { default as getPopularMovies } from './getPopularMovies'
+export { default as searchForMovie } from './searchForMovie'
+export { default as postRating } from './postRating'
+export { default as putRating } from './putRating'
+export { default as getLatestComments } from './getLatestComments'
