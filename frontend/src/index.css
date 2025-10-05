@@ -28,7 +28,7 @@ body {
   margin-bottom: 6em;
   min-width: 320px;
   min-height: 100vh;
-  height: 3456.810px;
+  max-height: 3456.810px;
 }
 
 h1 {
