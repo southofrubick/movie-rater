@@ -25,3 +25,6 @@ I did not have time to write any tests of any kind. But this is how (in broad st
 - Integration tests for the backend APIs that rely on a third party site.
 
 It's been a while since I've written something in dotnet, and OOP in general, but I'm happy with the result of what I've managed to do in this limited amount of time I've actually worked on this.
+
+In a production environment, the frontend/backend folders would also have been two separate repositories,
+as that would enable better CI/CD operations since react builds are usually way faster than any serious compilation required by most backends, and would enable scalability where necessary.
