@@ -28,3 +28,7 @@ It's been a while since I've written something in dotnet, and OOP in general, bu
 
 In a production environment, the frontend/backend folders would also have been two separate repositories,
 as that would enable better CI/CD operations since react builds are usually way faster than any serious compilation required by most backends, and would enable scalability where necessary.
+
+Currently, when reviewing *popular movies*, the total score does not auto update, but requires a refresh of the page.
+
+I've set up the beginnings of pagination, but did not have time to fully implement it, so we currently only fetch the latest 10 comments, but changing it is as simple as updating the size default value in getLatestComments in the MovieService in the backend.
