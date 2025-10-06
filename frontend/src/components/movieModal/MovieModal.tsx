@@ -71,7 +71,7 @@ export default function MovieModal(props: MovieModalProps) {
                 </div>
                 <button id="close-button" onClick={closeModal} >X</button>
             </div>
-            <div id="background-blur" />
+            <div id="background-blur" onClick={closeModal} />
         </>
     )
 }
